@@ -2,6 +2,7 @@
 
 angular.module('fccBooksApp', [
   'ngCookies',
+  'ngMaterial',
   'ngResource',
   'ngSanitize',
   'ui.router'

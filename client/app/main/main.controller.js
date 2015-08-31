@@ -1,22 +1,45 @@
 'use strict';
 
 angular.module('fccBooksApp')
-  .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [];
+  .controller('MainCtrl', function ($scope, $http, $mdSidenav, $mdUtil) {
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+    /**
+     * Build handler to open/close a SideNav; when animation finishes
+     * report completion in console
+     */
+    function buildToggler(navID) {
+      var debounceFn =  $mdUtil.debounce(function(){
+            $mdSidenav(navID)
+              .toggle()
+              .then(function () {
+                // animation is done
+              });
+          },200);
+      return debounceFn;
+    }
 
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
+    $scope.books = [];
+
+    $http.get('/api/books/search/javascript')
+    .success(function(books) {
+      console.log(books);
+      $scope.books = books;
     });
-
-    $scope.addThing = function() {
-      if($scope.newThing === '') {
-        return;
-      }
-      $http.post('/api/things', { name: $scope.newThing });
-      $scope.newThing = '';
+  })
+  .controller('LeftCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+    $scope.close = function () {
+      $mdSidenav('left').close()
+        .then(function () {
+          // closing left is done
+        });
     };
-
-    $scope.deleteThing = function(thing) {
-      $http.delete('/api/things/' + thing._id);
+  })
+  .controller('RightCtrl', function ($scope, $timeout, $mdSidenav, $log) {
+    $scope.close = function () {
+      $mdSidenav('right').close()
+        .then(function () {
+          // closing right is done
+        });
     };
   });
