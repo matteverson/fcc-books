@@ -1,3 +1,52 @@
-<div class="col-md-12">
-This is the mybooks view.
-</div>
+<div ng-include="'components/navbar/navbar.html'"></div>
+<section layout="row" flex>
+    <md-content flex layout-padding>
+      <div layout="column" layout-fill layout-align="top center">
+        <div layout="row" layout-wrap>
+          <div ng-repeat="book in books" layout-margin>
+            <img class="md-whiteframe-z2" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}"></img>
+            <md-tooltip>
+              {{ book.title }}
+            </md-tooltip>
+          </div>
+        </div>
+        <div>
+          <md-button class="md-fab md-fab-bottom-right" ng-click="toggleRight()">
+            <md-icon>add</md-icon>
+          </md-button>
+        </div>
+      </div>
+      <div flex>
+        <p>FCC Book Trading |
+          <a href="https://twitter.com/matteverson">@matteverson</a>
+        </p>
+      </div>
+    </md-content>
+    <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+      <md-toolbar class="md-theme-light">
+        <h1 class="md-toolbar-tools">Add a book</h1>
+      </md-toolbar>
+      <md-content layout-padding>
+        <div layout="row">
+        <form ng-submit="search(bookName)">
+          <md-input-container>
+            <label for="bookName">Name</label>
+            <input type="text" id="bookName"
+                   ng-model="bookName" md-sidenav-focus>
+          </md-input-container>
+        </form>
+        <md-button type="submit" class="md-icon-button" ng-click="search(bookName)">
+          <md-icon>search</md-icon>
+        </md-button>
+      </div>
+      <div layout="row" layout-wrap>
+          <div flex="40" ng-repeat="book in searchResults" layout-margin>
+            <img class="small-image md-whiteframe-z2" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}" ng-click="add(book)"></img>
+            <md-tooltip>
+              {{ book.title }}
+            </md-tooltip>
+          </div>
+      </div>
+      </md-content>
+    </md-sidenav>
+  </section>

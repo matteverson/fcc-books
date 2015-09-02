@@ -1,29 +1,49 @@
-<div class="navbar navbar-default navbar-static-top" ng-controller="NavbarCtrl">
-  <div class="container">
-    <div class="navbar-header">
-      <button class="navbar-toggle" type="button" ng-click="isCollapsed = !isCollapsed">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand">fcc-books</a>
-    </div>
-    <div collapse="isCollapsed" class="navbar-collapse collapse" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <li ng-repeat="item in menu" ng-class="{active: isActive(item.link)}">
-            <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
-        <li ng-show="isAdmin()" ng-class="{active: isActive('/admin')}"><a href="/admin">Admin</a></li>
-      </ul>
-
-      <ul class="nav navbar-nav navbar-right">
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li>
-        <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
-        <li ng-show="isLoggedIn()"><p class="navbar-text">Hello {{ getCurrentUser().name }}</p> </li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
-      </ul>
-    </div>
+<div ng-controller="NavbarCtrl">
+<md-toolbar>
+  <div class="md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+      <md-icon>menu</md-icon>
+    </md-button>
+    <h2>
+      <span>{{ getTitle() }}</span>
+    </h2>
+    <span flex></span>
+    <md-button class="md-icon-button" aria-label="All books" ng-click="go('/')">
+      <md-icon>book</md-icon>
+      <md-tooltip>All books</md-tooltip>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="My books" ng-click="go('/mybooks')">
+      <md-icon>library_books</md-icon>
+      <md-tooltip>My books</md-tooltip>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="Trade requests">
+      <md-icon>swap_horiz</md-icon>
+      <md-tooltip>Trade requests</md-tooltip>
+    </md-button>
   </div>
+</md-toolbar>
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left">
+  <md-toolbar class="md-theme-indigo md-toolbar-tools">
+    <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
+      <md-icon>menu</md-icon>
+    </md-button>
+    <h1>Book Broker</h1>
+  </md-toolbar>
+  <md-content layout-padding>
+    <md-list>
+      <md-list-item ng-click="go('/login')">
+        <md-icon>verified_user</md-icon>
+        <p>Login</p>
+      </md-list-item>
+      <md-list-item ng-click="go('/signup')">
+        <md-icon>account_box</md-icon>
+        <p>Register</p>
+      </md-list-item>
+      <md-list-item ng-click="go('/settings')">
+        <md-icon>settings</md-icon>
+        <p>Settings</p>
+      </md-list-item>
+    </md-list>
+  </md-content>
+</md-sidenav>
 </div>

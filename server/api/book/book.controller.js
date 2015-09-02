@@ -11,6 +11,15 @@ exports.search = function(req, res) {
   });
 };
 
+exports.mine = function(req, res) {
+  Book.find()
+  .where('owner').equals(req.body.user)
+  .exec(function (err, books) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(books);
+  });
+};
+
 // Get list of books
 exports.index = function(req, res) {
   Book.find(function (err, books) {

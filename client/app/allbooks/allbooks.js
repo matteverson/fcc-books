@@ -4,7 +4,7 @@ angular.module('fccBooksApp')
   .config(function ($stateProvider) {
     $stateProvider
       .state('allbooks', {
-        url: '/allbooks',
+        url: '/',
         templateUrl: 'app/allbooks/allbooks.html',
         controller: 'AllbooksCtrl'
       });
