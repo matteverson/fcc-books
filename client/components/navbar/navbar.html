@@ -4,19 +4,17 @@
     <md-button class="md-icon-button" aria-label="Settings" ng-click="toggleLeft()">
       <md-icon>menu</md-icon>
     </md-button>
-    <h2>
-      <span>{{ getTitle() }}</span>
-    </h2>
+    <h2>{{ getTitle() }}</h2>
     <span flex></span>
     <md-button class="md-icon-button" aria-label="All books" ng-click="go('/')">
       <md-icon>book</md-icon>
       <md-tooltip>All books</md-tooltip>
     </md-button>
-    <md-button class="md-icon-button" aria-label="My books" ng-click="go('/mybooks')">
+    <md-button class="md-icon-button" aria-label="My books" ng-click="go('/mybooks')" ng-show="isLoggedIn">
       <md-icon>library_books</md-icon>
       <md-tooltip>My books</md-tooltip>
     </md-button>
-    <md-button class="md-icon-button" aria-label="Trade requests">
+    <md-button class="md-icon-button" aria-label="Trade requests" ng-show="isLoggedIn">
       <md-icon>swap_horiz</md-icon>
       <md-tooltip>Trade requests</md-tooltip>
     </md-button>
@@ -31,17 +29,21 @@
   </md-toolbar>
   <md-content layout-padding>
     <md-list>
-      <md-list-item ng-click="go('/login')">
+      <md-list-item ng-click="go('/login')" ng-hide="isLoggedIn">
         <md-icon>verified_user</md-icon>
         <p>Login</p>
       </md-list-item>
-      <md-list-item ng-click="go('/signup')">
+      <md-list-item ng-click="go('/signup')" ng-hide="isLoggedIn">
         <md-icon>account_box</md-icon>
         <p>Register</p>
       </md-list-item>
-      <md-list-item ng-click="go('/settings')">
+      <md-list-item ng-click="go('/settings')" ng-show="isLoggedIn">
         <md-icon>settings</md-icon>
         <p>Settings</p>
+      </md-list-item>
+      <md-list-item ng-click="logout()" ng-show="isLoggedIn">
+        <md-icon>close</md-icon>
+        <p>Log out</p>
       </md-list-item>
     </md-list>
   </md-content>

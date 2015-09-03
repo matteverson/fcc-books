@@ -80,6 +80,24 @@ exports.changePassword = function(req, res, next) {
 };
 
 /**
+ * Update a users profile
+ */
+exports.updateProfile = function(req, res, next) {
+  var userId = req.user._id;
+
+  User.findById(userId, function (err, user) {
+    if(err) return res.status(404).send(err);
+    user.name = req.body.name;
+    user.city = req.body.city;
+    user.state = req.body.state;
+    user.save(function(err) {
+      if (err) return validationError(res, err);
+      res.status(200).send('OK');
+    });
+  });
+};
+
+/**
  * Get my info
  */
 exports.me = function(req, res, next) {

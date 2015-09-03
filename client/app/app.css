@@ -47,3 +47,7 @@ md-icon.fa {
   color: white !important;
   background-color: #55acee !important;
 }
+
+.background-message {
+  color: #ccc;
+}

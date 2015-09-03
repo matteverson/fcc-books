@@ -3,6 +3,8 @@
 angular.module('fccBooksApp')
   .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
     var currentUser = {};
+    var currentProfile = {};
+
     if($cookieStore.get('token')) {
       currentUser = User.get();
     }
@@ -85,6 +87,31 @@ angular.module('fccBooksApp')
         return User.changePassword({ id: currentUser._id }, {
           oldPassword: oldPassword,
           newPassword: newPassword
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
+      /**
+       * Update profile
+       *
+       * @param  {String}   name
+       * @param  {String}   city
+       * @param  {String}   state
+       * @param  {String}   email
+       * @param  {Function} callback    - optional
+       * @return {Promise}
+       */
+      updateProfile: function(name, city, state, email, callback) {
+        var cb = callback || angular.noop;
+
+        return User.updateProfile({ id: currentUser._id }, {
+          name: name,
+          city: city,
+          state: state,
+          email: email
         }, function(user) {
           return cb(user);
         }, function(err) {

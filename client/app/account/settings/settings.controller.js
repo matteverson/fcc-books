@@ -3,9 +3,9 @@
 angular.module('fccBooksApp')
   .controller('SettingsCtrl', function ($scope, User, Auth) {
     $scope.errors = {};
+    $scope.user = Auth.getCurrentUser();
 
     $scope.changePassword = function(form) {
-      $scope.submitted = true;
       if(form.$valid) {
         Auth.changePassword( $scope.user.oldPassword, $scope.user.newPassword )
         .then( function() {
@@ -18,4 +18,13 @@ angular.module('fccBooksApp')
         });
       }
 		};
+
+    $scope.updateProfile = function(form) {
+      if(form.$valid) {
+        Auth.updateProfile($scope.user.name, $scope.user.city, $scope.user.state, $scope.user.email)
+        .then(function() {
+          $scope.message = "Profile successfully updated.";
+        })
+      }
+    }
   });

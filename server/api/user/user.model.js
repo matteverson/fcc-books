@@ -16,7 +16,9 @@ var UserSchema = new Schema({
   provider: String,
   salt: String,
   twitter: {},
-  github: {}
+  github: {},
+  city: String,
+  state: String
 });
 
 /**
@@ -39,7 +41,9 @@ UserSchema
   .get(function() {
     return {
       'name': this.name,
-      'role': this.role
+      'role': this.role,
+      'city': this.city,
+      'state': this.state
     };
   });
 

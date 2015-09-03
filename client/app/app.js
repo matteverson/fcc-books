@@ -5,6 +5,7 @@ angular.module('fccBooksApp', [
   'ngMaterial',
   'ngResource',
   'ngSanitize',
+  'ngMessages',
   'ui.router'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider) {

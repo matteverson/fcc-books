@@ -18,9 +18,9 @@ angular.module('fccBooksApp')
     return debounceFn;
   }
 
-  $scope.isLoggedIn = Auth.isLoggedIn;
-  $scope.isAdmin = Auth.isAdmin;
-  $scope.getCurrentUser = Auth.getCurrentUser;
+  $scope.isLoggedIn = Auth.isLoggedIn();
+  $scope.isAdmin = Auth.isAdmin();
+  $scope.getCurrentUser = Auth.getCurrentUser();
 
   $scope.logout = function() {
     Auth.logout();
@@ -29,6 +29,12 @@ angular.module('fccBooksApp')
 
   $scope.getTitle = function() {
       switch($location.path()) {
+      case '/login':
+        return 'Log in';
+      case '/signup':
+        return 'Register';
+      case '/settings':
+        return 'Settings';
       case '/mybooks':
         return 'My Books';
       case '/':

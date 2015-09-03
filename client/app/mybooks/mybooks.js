@@ -6,6 +6,7 @@ angular.module('fccBooksApp')
       .state('mybooks', {
         url: '/mybooks',
         templateUrl: 'app/mybooks/mybooks.html',
-        controller: 'MybooksCtrl'
+        controller: 'MybooksCtrl',
+        authenticate: true
       });
   });

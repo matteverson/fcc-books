@@ -1,7 +1,6 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<section layout="row" flex>
-    <md-content flex layout-padding>
-      <div layout="column" layout-fill layout-align="top center">
+<section flex layout="column">
+      <div ng-show="books.length" layout="column" layout-fill layout-align="top center">
         <div layout="row" layout-wrap>
           <div ng-repeat="book in books" layout-margin>
             <img class="md-whiteframe-z2" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}"></img>
@@ -10,18 +9,15 @@
             </md-tooltip>
           </div>
         </div>
-        <div>
-          <md-button class="md-fab md-fab-bottom-right" ng-click="toggleRight()">
-            <md-icon>add</md-icon>
-          </md-button>
-        </div>
       </div>
-      <div flex>
-        <p>FCC Book Trading |
-          <a href="https://twitter.com/matteverson">@matteverson</a>
-        </p>
+      <div ng-show="!books.length" flex layout layout-align="center center">
+          <h1 class="md-display-2 background-message">Your library is empty. Click below to add a book.</h1>
       </div>
-    </md-content>
+      <md-button class="md-fab md-fab-bottom-right" ng-click="toggleRight()">
+        <md-icon>add</md-icon>
+      </md-button>
+  </section>
+  <section>
     <md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
       <md-toolbar class="md-theme-light">
         <h1 class="md-toolbar-tools">Add a book</h1>
