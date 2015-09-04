@@ -51,3 +51,26 @@ md-icon.fa {
 .background-message {
   color: #ccc;
 }
+
+.overlay-container {
+  z-index: 0;
+  position: relative;
+}
+
+.overlay {
+  z-index: 10;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(0,0,0,0.3);
+}
+
+.beneath-overlay {
+  z-index: 1;
+}
+
+.book-image:hover {
+  opacity: 0.7;
+}

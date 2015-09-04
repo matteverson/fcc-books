@@ -18,9 +18,11 @@ angular.module('fccBooksApp')
     return debounceFn;
   }
 
-  $scope.isLoggedIn = Auth.isLoggedIn();
-  $scope.isAdmin = Auth.isAdmin();
-  $scope.getCurrentUser = Auth.getCurrentUser();
+  Auth.isLoggedInAsync(function(result) {
+      $scope.isLoggedIn = result;
+      $scope.isAdmin = Auth.isAdmin();
+      $scope.getCurrentUser = Auth.getCurrentUser();
+  });
 
   $scope.logout = function() {
     Auth.logout();
@@ -39,6 +41,8 @@ angular.module('fccBooksApp')
         return 'My Books';
       case '/':
         return 'All Books';
+      case '/trades':
+        return 'Trade Requests';
       default:
         return 'Book Broker';
       };

@@ -11,6 +11,18 @@ exports.index = function(req, res) {
   });
 };
 
+// Get list of trades where user is requester or requestee
+exports.mine = function(req, res) {
+  Trade.find()
+  .or([{requester: req.user._id}, {requestee: req.user._id}])
+  .populate('book')
+  .populate('requester requestee', 'email name')
+  .exec(function (err, trades) {
+    if(err) { return handleError(res, err); }
+    return res.status(200).json(trades);
+  });
+};
+
 // Get a single trade
 exports.show = function(req, res) {
   Trade.findById(req.params.id, function (err, trade) {

@@ -38,5 +38,17 @@ angular.module('fccBooksApp')
       getMyBooks();
     };
 
+    $scope.toggleDelete = function(book) {
+      var i = $scope.books.indexOf(book);
+      $scope.books[i].showDelete = !$scope.books[i].showDelete;
+    };
+
+    $scope.delete = function(book) {
+      $http.delete('/api/books/' + book._id)
+      .success(function(book) {
+        getMyBooks();
+      });
+    };
+
     getMyBooks();
   });

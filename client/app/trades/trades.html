@@ -1,0 +1,72 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<section flex layout="column" layout-margin>
+  <div layout-sm="column" layout-gt-sm="row" flex layout-align="space-around">
+    <section flex-sm="100" flex-gt-sm="45" class="trade-container md-whiteframe-z2">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2 class="md-title">Your books</h2>
+        </div>
+      </md-toolbar>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">Pending</md-subheader>
+        <md-list-item class="background-message" ng-hide="pendingTrades.length">
+          None
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-repeat="trade in pendingTrades">
+          <div flex class="md-list-item-text">
+            <h3>{{ trade.book.title }}</h3>
+            <h4>{{ trade.requester.name }}</h4>
+            <p>{{ trade.requester.email }}</p>
+          </div>
+          <md-icon ng-click="approve(trade)">done</md-icon>
+          <md-icon ng-click="cancel(trade)">delete</md-icon>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader class="md-no-sticky">Approved</md-subheader>
+        <md-list-item class="background-message" ng-hide="approvedTrades.length">
+          None
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-repeat="trade in approvedTrades">
+          <div flex class="md-list-item-text">
+            <h3>{{ trade.book.title }}</h3>
+            <h4>{{ trade.requester.name }}</h4>
+            <p>{{ trade.requester.email }}</p>
+          </div>
+          <md-icon ng-click="cancel(trade)">delete</md-icon>
+        </md-list-item>
+      </md-list>
+    </section>
+    <section flex="45" class="md-whiteframe-z2">
+      <md-toolbar>
+        <div class="md-toolbar-tools">
+          <h2 class="md-title">Other books</h2>
+        </div>
+      </md-toolbar>
+      <md-list flex>
+        <md-subheader class="md-no-sticky">Pending</md-subheader>
+        <md-list-item class="background-message" ng-hide="yourRequests.length">
+          None
+        </md-list-item>
+        <md-list-item ng-repeat="trade in yourRequests">
+          <div flex class="md-list-item-text">
+            {{ trade.book.title }}
+          </div>
+          <md-icon ng-click="cancel(trade)">delete</md-icon>
+        </md-list-item>
+        <md-divider></md-divider>
+        <md-subheader class="md-no-sticky">Approved</md-subheader>
+        <md-list-item class="background-message" ng-hide="yourApprovals.length">
+          None
+        </md-list-item>
+        <md-list-item class="md-3-line" ng-repeat="trade in yourApprovals">
+          <div flex class="md-list-item-text">
+            <h3>{{ trade.book.title }}</h3>
+            <h4>{{ trade.requestee.name }}</h4>
+            <p>{{ trade.requestee.email }}</p>
+          </div>
+          <md-icon ng-click="cancel(trade)">delete</md-icon>
+        </md-list-item>
+      </md-list>
+    </section>
+  </div>
+</section>

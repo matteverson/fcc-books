@@ -2,16 +2,23 @@
 <section flex layout="column">
       <div ng-show="books.length" layout="column" layout-fill layout-align="top center">
         <div layout="row" layout-wrap>
-          <div ng-repeat="book in books" layout-margin>
-            <img class="md-whiteframe-z2" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}"></img>
-            <md-tooltip>
-              {{ book.title }}
-            </md-tooltip>
+          <div layout-margin ng-repeat="book in books">
+            <div class="overlay-container" ng-click="toggleDelete(book)">
+              <img class="book-image" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}"></img>
+              <md-tooltip>
+                {{ book.title }}
+              </md-tooltip>
+              <div class="overlay" ng-show="book.showDelete" layout layout-align="center center">
+              <md-button class="md-fab md-mini md-warn" ng-click="delete(book)">
+                <md-icon>delete</md-icon>
+              </md-button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <div ng-show="!books.length" flex layout layout-align="center center">
-          <h1 class="md-display-2 background-message">Your library is empty. Click below to add a book.</h1>
+      <div ng-show="!books.length" flex layout layout-align="center center" layout-padding>
+        <h1 class="md-display-2 background-message">Your library is empty. Click below to add a book.</h1>
       </div>
       <md-button class="md-fab md-fab-bottom-right" ng-click="toggleRight()">
         <md-icon>add</md-icon>

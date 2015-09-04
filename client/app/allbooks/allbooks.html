@@ -1,9 +1,20 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div layout="row" layout-wrap>
-  <div ng-repeat="book in books" layout-margin>
-    <img class="md-whiteframe-z2" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}"></img>
-    <md-tooltip>
-      {{ book.title }}
-    </md-tooltip>
+<section flex layout="column">
+  <div layout="column" layout-fill layout-align="top center">
+    <div layout="row" layout-wrap>
+      <div layout-margin ng-repeat="book in books">
+        <div class="overlay-container" ng-click="toggleTrade(book)">
+          <img class="book-image" ng-src="{{ book.thumbnail }}" alt="{{ book.title }}"></img>
+          <md-tooltip>
+            {{ book.title }}
+          </md-tooltip>
+          <div class="overlay" ng-show="book.showTrade" layout layout-align="center center">
+            <md-button class="md-fab md-mini md-warn" ng-click="trade(book)">
+              <md-icon>swap_horiz</md-icon>
+            </md-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
