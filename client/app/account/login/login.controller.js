@@ -23,6 +23,10 @@ angular.module('fccBooksApp')
       }
     };
 
+    $scope.go = function(path) {
+      $location.path(path);
+    };
+
     $scope.loginOauth = function(provider) {
       $window.location.href = '/auth/' + provider;
     };

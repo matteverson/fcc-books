@@ -6,7 +6,7 @@
     </md-button>
     <h2>{{ getTitle() }}</h2>
     <span flex></span>
-    <md-button class="md-icon-button" aria-label="All books" ng-click="go('/')">
+    <md-button class="md-icon-button" aria-label="All books" ng-show="isLoggedIn" ng-click="go('/')">
       <md-icon>book</md-icon>
       <md-tooltip>All books</md-tooltip>
     </md-button>
